@@ -7,9 +7,9 @@
     <title>Login de Usuarios</title>
     <!-- Vincula los estilos de Bootstrap -->
 
-    <link rel="stylesheet" href="<?php echo base_url('adminlte/dist/css/login.css'); ?>">
+    
     <link rel="stylesheet" href="<?php echo base_url('bootstrap/css/bootstrap.min.css'); ?>">
-    <link rel="stylesheet" href="<?php echo base_url('adminlte/dist/css/login.css'); ?>">
+    
 
 </head>
 

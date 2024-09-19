@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url('adminlte/dist/css/login.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/login.css">
 
 
 <script src="<?php echo base_url('bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
