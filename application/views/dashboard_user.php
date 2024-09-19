@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Ejemplo</title>
     <!-- Vincula tu archivo CSS aquí -->
-    <link rel="stylesheet" href="<?php echo base_url('adminlte/dist/css/dashboard.css'); ?>">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/dashboard.css">
+    
 </head>
 <body>
     <div class="sidebar">

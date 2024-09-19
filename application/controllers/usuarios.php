@@ -9,12 +9,11 @@ class Usuarios extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->view('inc/head');
 		$this->load->view('loginform');
-
 		$this->load->view('inc/pie');
 	}
 
 	public function validarusuario()
-{
+   {
     $login = $_POST['correo'];
     $password = $_POST['password'];
 
@@ -26,11 +25,19 @@ class Usuarios extends CI_Controller
         $this->session->set_userdata('idusuario', $usuario->id_usuario);
         $this->session->set_userdata('login', $usuario->login);
         $this->session->set_userdata('tipo', $usuario->rol);
+		// En el controlador, después de autenticar al usuario:
+        $this->session->set_userdata('nombre', $usuario->nombre);
+
+		
+
         $estado=$usuario->rol;
-        if($estado==='user'){		
-			redirect('usuarios/dashboardUser','refresh');
+		//$rootpage=$estado==='user'
+        if($estado==='user'){
+			//echo "user";	
+			redirect('DashboardControllerUser/index','refresh');
 		}else{
-			redirect('usuarios/dashboard', 'refresh');
+           // echo "admin";
+			redirect('DashboardController/index', 'refresh');
 		}
         // Redirigir a la dashboard
     } else {
@@ -38,18 +45,10 @@ class Usuarios extends CI_Controller
         redirect('usuarios/index', 'refresh');
     }
 }
-    public function dashboardUser()
-	{
-		$this->load->view('dashboard_user');
-	}
-
-	public function dashboard()
-	{
-		$this->load->view('dashboard');
-	}
+    
 	public function registroUsuarioDB()
 	{
-		$this->form_validation->set_rules('username', 'Username', 'required');
+		
 		$data['nombre'] = ($_POST['nombre']);
 		$data['apellidos'] = ($_POST['apellidos']);
 		$data['correo'] = ($_POST['correo']);
@@ -83,5 +82,5 @@ class Usuarios extends CI_Controller
 		// Cargar la vista de registro
 		$this->load->view('registro');
 	}
-
+	
 }

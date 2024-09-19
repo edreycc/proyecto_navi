@@ -56,4 +56,6 @@ $route['translate_uri_dashes'] = FALSE;
 $route['usuarios/dashboard_user'] = 'usuarios/dashboard_user';
 $route['usuarios/dashboard'] = 'usuarios/dashboard';
 $route['dash'] = 'DashboardController/index';
+$route['dashUser'] = 'DashboardControllerUser/vista';
+
 

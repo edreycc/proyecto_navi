@@ -40,4 +40,23 @@ class Usuario_model extends CI_Model
 			return false;
 		}
 	}
+
+	public function get_usuario_by_id($user_id) {
+        $this->db->where('id_usuario', $user_id);  // Filtra por ID
+        $query = $this->db->get('usuarios');  // Obtén los datos de la tabla 'usuarios'
+        
+        // Verifica si hay resultados y devuelve el primer resultado
+        if ($query->num_rows() > 0) {
+            return $query->row();  // Devuelve un objeto con los datos del usuario
+        } else {
+            return null;  // Devuelve null si no se encuentra el usuario
+        }
+    }
+
+	public function listausuarios()
+	{
+		$this->db->select('*'); // slecet *
+		$this->db->from('usuarios'); //tabla
+		return $this->db->get(); //devolución del resultado de la consulta
+	}
 }
