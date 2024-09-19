@@ -24,7 +24,7 @@ class DashboardController extends CI_Controller
     public function listar(){
         if($this->session->userdata('tipo')=='admin'){
 
-			$lista=$this->usuario_model->listausuarios();
+			$lista=$this->account_model->listausuarios();
 			$data['usuarios']=$lista;
             $this->load->view('admin/head');
             $this->load->view('admin/listar_usuario',$data);
