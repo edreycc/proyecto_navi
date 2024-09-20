@@ -27,10 +27,37 @@ class DashboardController extends CI_Controller
 			$lista=$this->account_model->listausuarios();
 			$data['usuarios']=$lista;
             $this->load->view('admin/head');
-            $this->load->view('admin/listar_usuario',$data);
+            $this->load->view('admin/usuarios/listar_usuario',$data);
             $this->load->view('admin/footer');
             
         }
+    }
+
+    public function agregarUsuario(){
+        
+        $this->load->view('admin/head');
+        $this->load->view('admin/sidebarr');
+        $this->load->view('admin/topbar');
+        $this->load->view('admin/usuarios/agregar_usuario');
+        $this->load->view('admin/footer');
+    }
+
+    public function deshabilitarUsuario(){
+        
+        $this->load->view('admin/head');
+        $this->load->view('admin/sidebarr');
+        $this->load->view('admin/topbar');
+        $this->load->view('admin/usuarios/deshabilitar_usuario');
+        $this->load->view('admin/footer');
+    }
+   
+    public function modificarUsuario(){
+        
+        $this->load->view('admin/head');
+        $this->load->view('admin/sidebarr');
+        $this->load->view('admin/topbar');
+        $this->load->view('admin/usuarios/modificar_usuario');
+        $this->load->view('admin/footer');
     }
 
     

@@ -155,11 +155,16 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Usuarios</h6>
                         </div>
+
+
                         <div class="card-body">
+
                             <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                                
+                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
@@ -167,9 +172,10 @@
                                             <th>Celular</th>
                                             <th>Correo</th>
                                             <th>Dirección</th>
-                                            <th>Rol</th>
-                                            <th>Login</th>
-                                            <th>Password</th>
+                                            <th>Modificar</th>
+                                            <!-- <th>Habilitar</th> -->
+                                            <th>Deshabilitar</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -179,9 +185,11 @@
                                             <th>Celular</th>
                                             <th>Correo</th>
                                             <th>Dirección</th>
-                                            <th>Rol</th>
-                                            <th>Login</th>
-                                            <th>Password</th>
+                                            <th>Modificar</th>
+                                            <!-- <th>Habilitar</th> -->
+                                            <th>Deshabilitar</th>
+                                            
+                                            
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -193,9 +201,38 @@
                                                     <td><?= $usuario->celular; ?></td>
                                                     <td><?= $usuario->correo; ?></td>
                                                     <td><?= $usuario->direccion; ?></td>
-                                                    <td><?= $usuario->rol; ?></td>
-                                                    <td><?= $usuario->login; ?></td>
-                                                    <td><?= $usuario->password; ?></td>
+                                                    
+                                                    <!-- modificar -->
+                                                    <td>              
+                                                    <?php echo form_open_multipart('dashboardcontroller/modificarUsuario'); ?>
+                                                    <input type="hidden" name="idusuario" value="<?php echo $usuario->id_usuario; ?>">
+                                                    <button type="submit" name="buttony" class="btn btn-primary" style="margin-bottom: 10px;"> 
+                                                        <i class="fa-solid fa-pen"></i> 
+                                                    </button>
+                                                    <?php echo form_close(); ?>
+                                                    </td>
+
+
+                                                    <!-- <td>
+                                                    <?php echo form_open_multipart(); ?>
+                                                    <input type="hidden" name="idusuario" value="<?php echo $usuario->id_usuario; ?>">
+                                                    <button type="submit" name="buttony" class="btn btn-success">
+                                                    <i class="fa-solid fa-user-plus"></i>
+                                                    </button>
+                                                    <?php echo form_close(); ?>
+                                                    </td> -->
+
+  
+                                                    <!-- deshablitar -->
+                                                    <td>
+                                                    <?php echo form_open_multipart(); ?>
+                                                    <input type="hidden" name="idusuario" value="<?php echo $usuario->id_usuario; ?>">
+                                                    <button type="submit" name="buttony" class="btn btn-warning" style="margin-bottom: 10px;">
+                                                    <i class="fa-solid fa-user-large-slash"></i>
+                                                    </button>
+                                                    <?php echo form_close(); ?>
+                                                    </td>
+                                                    
                                                 </tr>
                                             <?php endforeach; ?>
                                         <?php else: ?>
@@ -204,9 +241,15 @@
                                             </tr>
                                         <?php endif; ?>
                                     </tbody>
+
+                                    
                                 </table>
 
                             </div>
+                            <a href="<?php echo base_url() ;?>index.php/dashboardcontroller/deshabilitarUsuario " class="btn btn-primary btn-sm" style="margin-bottom: 10px;">
+                                <i class="fa-solid fa-minus"></i>
+                                    usuarios deshabilitados
+                            </a>   
                         </div>
                     </div>
 
@@ -229,25 +272,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+  
 
 
 
