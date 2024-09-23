@@ -206,7 +206,7 @@
                                                     <td>              
                                                     <?php echo form_open_multipart('dashboardcontroller/modificarUsuario'); ?>
                                                     <input type="hidden" name="idusuario" value="<?php echo $usuario->id_usuario; ?>">
-                                                    <button type="submit" name="buttony" class="btn btn-primary" style="margin-bottom: 10px;"> 
+                                                    <button type="submit" name="buttony" class="btn btn-primary btn-small-custom" style="margin-bottom: 10px;"> 
                                                         <i class="fa-solid fa-pen"></i> 
                                                     </button>
                                                     <?php echo form_close(); ?>
@@ -227,7 +227,7 @@
                                                     <td>
                                                     <?php echo form_open_multipart(); ?>
                                                     <input type="hidden" name="idusuario" value="<?php echo $usuario->id_usuario; ?>">
-                                                    <button type="submit" name="buttony" class="btn btn-warning" style="margin-bottom: 10px;">
+                                                    <button type="submit" name="buttony" " class="btn btn-warning btn-small-custom">
                                                     <i class="fa-solid fa-user-large-slash"></i>
                                                     </button>
                                                     <?php echo form_close(); ?>
