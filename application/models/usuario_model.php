@@ -53,5 +53,10 @@ class Usuario_model extends CI_Model
         }
     }
 
+	public function logout()
+	{
 
+		$this->session->sess_destroy();
+		redirect('loginform','refresh');
+	}
 }
