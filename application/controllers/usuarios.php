@@ -4,46 +4,65 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Usuarios extends CI_Controller
 {
 
+	public function __construct(){
+        parent::__construct();
+        $this->load->library('form_validation');
+        $this->load->helper(array('autentificacion/aut_login'));
+        
+    }
 	public function index()
 	{
-		$this->load->library('form_validation');
-		$this->load->view('inc/head');
+		
+
 		$this->load->view('loginform');
-		$this->load->view('inc/pie');
+
 	}
 
 	public function validarusuario()
    {
-    $login = $_POST['correo'];
-    $password = $_POST['password'];
+	$this->form_validation->set_rules('correo', 'Correo', 'required|min_length[1]|max_length[50]');
+    $this->form_validation->set_rules('password', 'Contraseña', 'required|min_length[3]|max_length[50]');
+	
 
-    // Verificar el login
-    $usuario = $this->usuario_model->verificarLogin($login, $password);
+	if($this->form_validation->run()===false){
 
-    if ($usuario) {
-        // Si el usuario es válido, se establece la sesión
-        $this->session->set_userdata('idusuario', $usuario->id_usuario);
-        $this->session->set_userdata('login', $usuario->login);
-        $this->session->set_userdata('tipo', $usuario->rol);
-		// En el controlador, después de autenticar al usuario:
-        $this->session->set_userdata('nombre', $usuario->nombre);
+		$data['errors'] = validation_errors(); 
+        $this->load->view('loginform',$data);
 
-		
-
-        $estado=$usuario->rol;
-		//$rootpage=$estado==='user'
-        if($estado==='user'){
-			//echo "user";	
-			redirect('DashboardControllerUser/index','refresh');
-		}else{
-           // echo "admin";
-			redirect('DashboardController/index', 'refresh');
+        // redirect('usuarios/index', 'refresh');
+	}else{
+		$login = $_POST['correo'];
+		$password = $_POST['password'];
+		// Verificar el login
+		$usuario = $this->usuario_model->verificarLogin($login, $password);
+	
+		if ($usuario) {
+			// Si el usuario es válido, se establece la sesión
+			$this->session->set_userdata('idusuario', $usuario->id_usuario);
+			$this->session->set_userdata('login', $usuario->login);
+			$this->session->set_userdata('tipo', $usuario->rol);
+			// En el controlador, después de autenticar al usuario:
+			$this->session->set_userdata('nombre', $usuario->nombre);
+	
+			
+	
+			$estado=$usuario->rol;
+			//$rootpage=$estado==='user'
+			if($estado==='user'){
+				//echo "user";	
+				redirect('DashboardControllerUser/index','refresh');
+			}else{
+			   // echo "admin";
+				redirect('DashboardController/index', 'refresh');
+			}
+			// Redirigir a la dashboard
+		} else {
+			// Si el usuario no es válido, redirigir de vuelta al login
+			redirect('usuarios/index', 'refresh');
 		}
-        // Redirigir a la dashboard
-    } else {
-        // Si el usuario no es válido, redirigir de vuelta al login
-        redirect('usuarios/index', 'refresh');
-    }
+    
+	}
+
 }
     
 	public function registroUsuarioDB()
@@ -63,14 +82,14 @@ class Usuarios extends CI_Controller
 
 	}
 
-	public function panel()
-	{
-		if ($this->session->userdata('login')) {
-			redirect('estudiante/curso', 'refresh');
-		} else {
-			redirect('usuarios/index', 'refresh');
-		}
-	}
+	// public function panel()
+	// {
+	// 	if ($this->session->userdata('login')) {
+	// 		redirect('estudiante/curso', 'refresh');
+	// 	} else {
+	// 		redirect('usuarios/index', 'refresh');
+	// 	}
+	// }
 
 	public function logout()
 	{

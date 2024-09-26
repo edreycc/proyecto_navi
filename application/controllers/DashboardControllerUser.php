@@ -20,7 +20,7 @@ class DashboardControllerUser extends CI_Controller
         $this->load->view('cliente/sidebar',$data);
         $this->load->view('cliente/footer');
     }
-
+    
     // public function index()
     // {
     //     $this->load->view('inc/vistaslte/head');

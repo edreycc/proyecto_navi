@@ -19,6 +19,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
+    <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>bootstrap/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="<?php echo base_url();?>admin-master/css/sb-admin-2.min.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/tables.css">
 

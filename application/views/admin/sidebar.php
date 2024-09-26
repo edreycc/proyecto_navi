@@ -45,7 +45,7 @@
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#"  
+                <a class="nav-link collapsed" href="<?php echo base_url() ;?>index.php/productocontroller/listar"  
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fa-brands fa-product-hunt"></i>
                     <span>Productos</span>
@@ -57,7 +57,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="<?php echo base_url() ;?>index.php/dashboardcontroller/listar " 
+                <a class="nav-link collapsed" href="#" 
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fa-solid fa-house-laptop"></i>
                     <span>Servicos</span>
