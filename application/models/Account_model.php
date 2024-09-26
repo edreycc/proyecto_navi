@@ -26,4 +26,6 @@ class Account_model extends CI_Model {
         $this->db->where('estado','0');
 		return $this->db->get();
     }
+
+    
 }

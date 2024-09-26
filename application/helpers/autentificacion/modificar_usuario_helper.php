@@ -4,7 +4,8 @@ function getModificarRules(){
             [
                 'field' => 'nombre',
                 'label' => 'Nombre',
-                'rules' => 'required|min_length[3]|max_length[50]'
+                'rules' => 'required|min_length[3]|max_length[50]',
+                'errors'=> array('required'=>'el nombre es requerido'),
             ],
             [
                 'field' => 'apellidos',
