@@ -2,6 +2,20 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class DashboardController extends CI_Controller
 {
+    public function __construct(){
+        parent::__construct();
+        $this->load->library('form_validation');
+        $this->load->helper(array('autentificacion/modificar_usuario'));
+        
+    }
+    public function loadAdminViews($viewName, $data = []) {
+        
+        $this->load->view('admin/head');
+        $this->load->view('admin/sidebar');
+        $this->load->view('admin/topbar');
+        $this->load->view($viewName, $data);
+        $this->load->view('admin/footer');
+    }
     public function index()
     {
         $user_id = $this->session->userdata('idusuario');
@@ -14,12 +28,8 @@ class DashboardController extends CI_Controller
         $data['usuario'] = $this->usuario_model->get_usuario_by_id($user_id);
 
         // Cargamos la vista del dashboard pasando los datos del usuario
-        
-        $this->load->view('admin/head');
-        $this->load->view('admin/sidebar');
-        $this->load->view('admin/topbar');   
-        $this->load->view('admin/inicio',$data);
-        $this->load->view('admin/footer');
+            
+        $this->loadAdminViews('admin/inicio',$data);
 
     }
 
@@ -28,11 +38,8 @@ class DashboardController extends CI_Controller
 
 			$lista=$this->account_model->listausuarios();
 			$data['usuarios']=$lista;
-            $this->load->view('admin/head');
-            $this->load->view('admin/sidebar');
-            $this->load->view('admin/topbar');
-            $this->load->view('admin/usuarios/listar_usuario',$data);
-            $this->load->view('admin/footer');
+
+            $this->loadAdminViews('admin/usuarios/listar_usuario', $data);
             
         }
     }
@@ -43,11 +50,8 @@ class DashboardController extends CI_Controller
         $lista=$this->account_model->listardeshabilitados();
         $data['usuarios']=$lista;
 
-        $this->load->view('admin/head');
-        $this->load->view('admin/sidebar');
-        $this->load->view('admin/topbar');
-        $this->load->view('admin/usuarios/deshabilitar_usuario',$data);
-        $this->load->view('admin/footer');
+        $this->loadAdminViews('admin/usuarios/deshabilitar_usuario',$data);
+
     }
    
     public function modificarUsuario(){
@@ -55,15 +59,14 @@ class DashboardController extends CI_Controller
         $idusuario=$_POST['idusuario'];
 		$data['infousuario']=$this->account_model->setUsuario($idusuario);
         
-        $this->load->view('admin/head');
-        $this->load->view('admin/sidebar');
-        $this->load->view('admin/topbar');
-        $this->load->view('admin/usuarios/modificar_usuario',$data);
-        $this->load->view('admin/footer');
+
+        $this->loadAdminViews('admin/usuarios/modificar_usuario',$data);
+
     }
 
     public function modificarUsuarioBD(){
 
+        
         $idusuario=$_POST['idusuario'];
 		$data['nombre'] = ($_POST['nombre']);
 		$data['apellidos'] = ($_POST['apellidos']);
@@ -97,6 +100,7 @@ class DashboardController extends CI_Controller
 		redirect('dashboardcontroller/listar','refresh');
     }
 
+    
     
     // public function index()
 	// {
