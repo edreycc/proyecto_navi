@@ -57,7 +57,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" 
+                <a class="nav-link collapsed" href="<?php echo base_url() ;?>index.php/serviciocontroller/listar" 
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fa-solid fa-house-laptop"></i>
                     <span>Servicos</span>

@@ -15,7 +15,7 @@
                             <div class="table-responsive">
 
                                 
-                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                 <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
@@ -54,7 +54,7 @@
                                                     <td><?= $usuario->direccion; ?></td>
                                                     
                                                     <!-- modificar -->
-                                                    <td>              
+                                                    <td class="text-center">              
                                                     <?php echo form_open_multipart('dashboardcontroller/modificarUsuario'); ?>
                                                     <input type="hidden" name="idusuario" value="<?php echo $usuario->id_usuario; ?>">
                                                     <button type="submit" name="buttony" class="btn btn-primary btn-small-custom" style="margin-bottom: 10px;"> 
@@ -75,7 +75,7 @@
 
   
                                                     <!-- deshablitar -->
-                                                    <td>
+                                                    <td class="text-center">
                                                         
                                                     <?php echo form_open_multipart('dashboardcontroller/deshabilitarUsuarioBD'); ?>
                                                     <input type="hidden" name="idusuario" value="<?php echo $usuario->id_usuario; ?>">

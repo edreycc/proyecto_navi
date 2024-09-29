@@ -4,6 +4,7 @@ class ProductoController extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->load->library('form_validation');
+        $this->load->helper('autentificacion/productos_val'); 
     }
     public function loadAdminViews($viewName, $data = []) {
         
@@ -45,33 +46,20 @@ class ProductoController extends CI_Controller{
 
         $data['proveedores'] = $this->producto_model->get_proveedores(); // Obtiene los proveedores
         $data['categorias'] = $this->producto_model->get_categorias(); // Obtiene las categorías
-        //$this->load->view('agregar_producto', $data); // Carga la vista y pasa los datos
+        
         $this->loadAdminViews('admin/productos/agregar_producto',$data);
     }
 
     public function agregarProductoBD() {
-        // Validación de los datos ingresados
-        $this->form_validation->set_rules('nombre', 'Nombre del Producto', 'required');
-        $this->form_validation->set_rules('marca', 'Marca', 'required');
-        $this->form_validation->set_rules('precio', 'Precio', 'required|numeric');
-        $this->form_validation->set_rules('stock', 'Stock', 'required|numeric');
-        $this->form_validation->set_rules('idproveedor', 'Proveedor', 'required');
-        $this->form_validation->set_rules('idcategoria', 'Categoría', 'required');
-
+        
+        $this->form_validation->set_rules(reglasAgregar());
+        
         if ($this->form_validation->run() == FALSE) {
-            // Si la validación falla, volver a la vista de agregar con los errores
+           
             $this->agregarProducto();
         } else {
-            // Datos del formulario
-            $datos_producto = array(
-                'nombre'        => $this->input->post('nombre'),
-                'marca'         => $this->input->post('marca'),
-                'precio'        => $this->input->post('precio'),
-                'stock'         => $this->input->post('stock'),
-                'id_proveedor'  => $this->input->post('idproveedor'),
-                'id_categoria'  => $this->input->post('idcategoria'),
-                'descripcion'   => $this->input->post('descripcion')
-            );
+        
+            $datos_producto = recogerDatosProducto($this->input);
 
             // Si se cargó una imagen, procesarla
             if (!empty($_FILES['imagen']['name'])) {
@@ -87,16 +75,95 @@ class ProductoController extends CI_Controller{
                 } else {
                     // Si la carga falla, mostrar error
                     $data['error'] = $this->upload->display_errors();
-                    $this->listar();
+                    $this->agregarProducto();
                     return;
                 }
             }
 
-            // Insertar el producto en la base de datos a través del modelo
-            $this->Producto_model->agregarProducto($datos_producto);
+            
+            $this->producto_model->agregarProducto($datos_producto);
 
-            // Redirigir a la lista de productos
+            
             redirect('productocontroller/listar','refresh');
         }
     }
+
+    public function modificarProducto() {
+        $id_producto = $this->input->post('idproducto'); // Asegúrate de que es 'idproducto'
+    
+        if (!$id_producto) {
+            // Manejar el caso en que no se haya recibido el ID del producto
+            show_error('El ID del producto no se ha recibido correctamente.');
+        }
+    
+        $data['producto'] =  $this->producto_model->get_producto($id_producto);
+        $data['proveedores'] = $this->producto_model->get_proveedores(); // Obtiene los proveedores
+        $data['categorias'] = $this->producto_model->get_categorias(); // Obtiene las categorías
+    
+        $this->loadAdminViews('admin/productos/modificar_producto', $data);
+    }
+    
+
+    public function modificarProductoBD() {
+        $id_producto = $this->input->post('idproducto'); 
+        
+        $this->form_validation->set_rules(reglasAgregar());
+
+        if ($this->form_validation->run() == FALSE) {
+
+            $data['producto'] = $this->Producto_model->get_producto($id_producto);
+            $data['proveedores'] = $this->Producto_model->get_proveedores();
+            $data['categorias'] = $this->Producto_model->get_categorias();
+            $this->loadAdminViews('admin/productos/modificar_producto', $data);
+        } else {
+           
+           
+            $datos_producto = recogerDatosProducto($this->input);
+
+
+            if (!empty($_FILES['imagen']['name'])) {
+                $config['upload_path']   = './uploads/productos/';
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                $this->load->library('upload', $config);
+
+                if ($this->upload->do_upload('imagen')) {
+
+                    $upload_data = $this->upload->data();
+                    $datos_producto['imagen'] = $upload_data['file_name'];
+                } else {
+
+                    $data['error'] = $this->upload->display_errors();
+                    $data['producto'] = $this->producto_model->get_producto($id_producto);
+                    $data['proveedores'] = $this->producto_model->get_proveedores();
+                    $data['categorias'] = $this->producto_model->get_categorias();
+                    $this->load->view('modificar_producto_view', $data);
+                    return;
+                }
+            }
+
+
+            $this->producto_model->actualizarProducto($id_producto, $datos_producto);
+
+            
+            // $this->session->set_flashdata('success', 'Producto modificado exitosamente.');
+            redirect('productocontroller/listar');
+        }
+    }
+    public function eliminarProductoBD() {
+        // Obtener el ID del producto desde el formulario
+        $id_producto = $this->input->post('idproducto'); // Asegúrate de que este nombre coincida con el campo oculto en tu formulario
+    
+        // Llamar al modelo para eliminar el producto
+        if ($this->producto_model->eliminarProducto($id_producto)) {
+            // Redirigir a la página de lista de productos con un mensaje de éxito
+            $this->session->set_flashdata('success', 'Producto eliminado correctamente.');
+        } else {
+            // Redirigir con un mensaje de error si la eliminación falla
+            $this->session->set_flashdata('error', 'No se pudo eliminar el producto. Inténtalo de nuevo.');
+        }
+    
+        redirect('productocontroller/listar'); // Cambia esto según tu ruta de redirección
+    }
+    
+
 }

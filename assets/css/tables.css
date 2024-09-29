@@ -5,3 +5,11 @@
     margin-bottom: 10px; /* Espaciado en la parte inferior */
 }
 
+.table td, .table th {
+    padding: 5px; /* Ajusta este valor a lo que desees */
+}
+/* .centrar-boton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */

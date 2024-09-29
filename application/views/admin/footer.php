@@ -49,6 +49,11 @@
     <!-- Page level custom scripts -->
     <script src="<?php echo base_url(); ?>admin-master/js/demo/datatables-demo.js"></script>
 
+    <script src="<?php echo base_url(); ?>assets/js/mensajes.js"></script>
+
+
+
+
 </body>
 
 </html>

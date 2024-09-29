@@ -4,7 +4,8 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="<?php echo base_url(); ?>index.php/productocontroller/listar" class="btn btn-primary btn-sm" style="margin-bottom: 10px;">
-                <i class="fa-solid fa-left-long"></i>               
+                <i class="fa-solid fa-left-long"></i> 
+                Atras              
             </a> 
             <h6 class="m-0 font-weight-bold text-primary">Agregar Producto</h6>
         </div>

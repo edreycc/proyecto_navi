@@ -1,7 +1,7 @@
 
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+             <div class="container-fluid">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -19,7 +19,7 @@
                                 Agregar producto
                               </a>
 
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0"  c>
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
@@ -45,10 +45,7 @@
                                             
                                             <!-- <th>Habilitar</th> -->
                                             <th>Modificar</th>
-                                            <th>Eliminar</th>
-                                            
-                                            
-                                            
+                                            <th>Eliminar</th>                                        
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -64,36 +61,36 @@
                                                     
                                                     
                                                     <!-- modificar -->
-                                                    <td>              
-                                                    <?php echo form_open_multipart(''); ?>
-                                                    <input type="hidden" name="idusuario" value="<?php echo $producto->id_producto; ?>">
-                                                    <button type="submit" name="buttony" class="btn btn-primary btn-small-custom" style="margin-bottom: 10px;"> 
-                                                        <i class="fa-solid fa-pen"></i> 
-                                                    </button>
-                                                    <?php echo form_close(); ?>
+                                                    <td class="text-center">              
+                                                        <?php echo form_open_multipart('productocontroller/modificarProducto'); ?>
+                                                        <input type="hidden" name="idproducto" value="<?php echo $producto->id_producto; ?>">
+                                                        <button type="submit" name="buttony" class="btn btn-primary btn-small-custom" style="margin-bottom: 10px;"> 
+                                                            <i class="fa-solid fa-pen"></i> 
+                                                        </button>
+                                                        <?php echo form_close(); ?>
+                                                    </td>
+  
+
+                                                    <td class="text-center">
+                                                        <?php echo form_open_multipart('productocontroller/eliminarProductoBD', ['id' => 'deleteForm']); ?>
+                                                        <input type="hidden" name="idproducto" value="<?php echo $producto->id_producto; ?>">
+                                                        <button type="button" class="btn btn-danger btn-small-custom" data-toggle="modal" data-target="#confirmModal">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                        <?php echo form_close(); ?>
                                                     </td>
 
 
-                                                    <!-- <td>
-                                                    <?php echo form_open_multipart(); ?>
-                                                    <input type="hidden" name="idusuario" value="<?php echo $usuario->id_usuario; ?>">
-                                                    <button type="submit" name="buttony" class="btn btn-success">
-                                                    <i class="fa-solid fa-user-plus"></i>
-                                                    </button>
-                                                    <?php echo form_close(); ?>
+                                                    <!-- eliminar -->
+                                                        <!-- <td class="text-center">
+                                                            <?php echo form_open_multipart('productocontroller/eliminarProductoBD'); ?>
+                                                            <input type="hidden" name="idproducto" value="<?php echo $producto->id_producto; ?>">
+                                                            <button type="button" onclick="confirmarEliminacion(this.form)" class="btn btn-danger btn-small-custom">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </button>
+                                                            <?php echo form_close(); ?>
                                                     </td> -->
 
-  
-                                                    <!-- eliminar -->
-                                                    <!-- <td>
-                                                        
-                                                    <?php echo form_open_multipart(); ?>
-                                                    <input type="hidden" name="idusuario" value="<?php echo $usuario->id_usuario; ?>">
-                                                    <button type="submit" name="buttony"  class="btn btn-warning btn-small-custom">
-                                                    <i class="fa-solid fa-user-large-slash"></i>
-                                                    </button>
-                                                    <?php echo form_close(); ?>
-                                                    </td> -->
                                                     
                                                 </tr>
                                             <?php endforeach; ?>
@@ -114,3 +111,23 @@
 
                 </div>
                 <!-- /.container-fluid -->
+                <!-- Modal de Confirmación -->
+                <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmModalLabel">Confirmación de Eliminación</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Estás seguro de que deseas eliminar este producto?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div
