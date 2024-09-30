@@ -1,0 +1,33 @@
+.card .icon {
+  font-size: 3rem;
+  color: lightseagreen;
+}
+
+.card-text {
+  color: gray;
+}
+
+.card {
+  transition: all 0.5s;
+}
+
+.card:hover {
+  background-color: lightseagreen;
+  color: #fff;
+}
+
+.card:hover .icon,
+.card:hover .card-text {
+  color: #fff;
+}
+
+/* Para que el enlace no tenga estilos de texto */
+.card-link {
+  text-decoration: none;
+}
+
+.precio{
+  font-size: 1.5rem; /* Tamaño del texto */
+  color: lightseagreen;
+  font-weight: bold; /* Negritas */
+}

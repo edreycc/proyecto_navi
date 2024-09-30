@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class DashboardControllerUser extends CI_Controller
 {
-
+    
     public function index()
     {
         $user_id = $this->session->userdata('idusuario');
@@ -11,13 +11,21 @@ class DashboardControllerUser extends CI_Controller
             redirect('loginform');  // Si no está logueado, redirigimos al login
         }
 
+        $data['servicios']=$this->servicio_model->getServicios();
         // Obtenemos más información del usuario si es necesario
         $data['usuario'] = $this->usuario_model->get_usuario_by_id($user_id);
 
-        // Cargamos la vista del dashboard pasando los datos del usuario
+    
+        
+        $this->loadClientViews('cliente/inicio_cli',$data);
+
+    }
+    public function loadClientViews($viewName, $data = []) {
         
         $this->load->view('cliente/head');
-        $this->load->view('cliente/sidebar',$data);
+        $this->load->view('cliente/sidebar');
+        $this->load->view('cliente/topbar');
+        $this->load->view($viewName, $data);
         $this->load->view('cliente/footer');
     }
     

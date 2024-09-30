@@ -47,7 +47,7 @@
 
                                     <!-- Modificar -->
                                     <td class="text-center">
-                                        <?php echo form_open_multipart('serviciocontroller/modificarServicio'); ?>
+                                        <?php echo form_open_multipart('serviciocontroller/modificar'); ?>
                                         <input type="hidden" name="idservicio" value="<?php echo $servicio->id_servicio; ?>">
                                         <button type="submit" name="buttony" class="btn btn-primary btn-small-custom" style="margin-bottom: 10px;"> 
                                             <i class="fa-solid fa-pen"></i> 

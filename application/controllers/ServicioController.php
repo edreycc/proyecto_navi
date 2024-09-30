@@ -7,6 +7,7 @@ class ServicioController extends CI_Controller {
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->helper('autentificacion/servicio_val'); 
+        $this->load->model('Servicio_model', 'servicio_model');
     }
 
     public function loadAdminViews($viewName, $data = []) {
@@ -39,36 +40,41 @@ class ServicioController extends CI_Controller {
         } else {
             
             $data = recogerDatosServicio($this->input);
-            $this->Servicio_model->insertServicio($data); // Llamar al modelo para insertar el servicio
+            $this->servicio_model->insertServicio($data); // Llamar al modelo para insertar el servicio
             redirect('ServicioController/listar'); // Redirigir a la lista de servicios
         }
     }
     
 
     // Método para mostrar el formulario de modificar servicio
-    public function modificar($id) {
-        $data['servicio'] = $this->Servicio_model->getServicioById($id); // Obtener el servicio por ID
-        $this->loadAdminViews('servicios/modificar', $data); // Cargar la vista de modificar servicio
+    public function modificar() {
+        $id= $this->input->post('idservicio');
+        $data['servicio'] = $this->servicio_model->getServicioById($id); // Obtener el servicio por ID
+        $this->loadAdminViews('admin/servicios/modificar_servicio', $data); // Cargar la vista de modificar servicio
     }
 
     // Método para actualizar el servicio en la base de datos
     public function modificarServicioBD() {
-        $data = array(
-            'id_servicio' => $this->input->post('id_servicio'),
-            'nombre' => $this->input->post('nombre'),
-            'descripcion' => $this->input->post('descripcion'),
-            'duracion' => $this->input->post('duracion'),
-            'precio' => $this->input->post('precio')
-        );
+        
+        $id_servicio = $this->input->post('idservicio'); 
+        $this->form_validation->set_rules(reglasAgregarServicio());
 
-        $this->Servicio_model->updateServicio($data); // Llamar al modelo para actualizar el servicio
-        redirect('ServicioController/listar'); // Redirigir a la lista de servicios
+       
+        if ($this->form_validation->run() == FALSE) {
+            redirect('ServicioController/modificar'); 
+        } else {
+            
+            $data=recogerDatosServicio($this->input);
+
+            $this->servicio_model->updateServicio($data,$id_servicio); // Llamar al modelo para actualizar el servicio
+            redirect('ServicioController/listar'); // Redirigir a la lista de servicios
+        }
     }
 
     // Método para eliminar un servicio
     public function eliminarServicioBD() {
-        $id = $this->input->post('id_servicio');
-        $this->Servicio_model->deleteServicio($id); // Llamar al modelo para eliminar el servicio
+        $id = $this->input->post('idservicio');
+        $this->servicio_model->deleteServicio($id); // Llamar al modelo para eliminar el servicio
         redirect('ServicioController/listar'); // Redirigir a la lista de servicios
     }
 }

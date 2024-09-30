@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Servicio_Model extends CI_Model {
+class Servicio_model extends CI_Model {
 
     public function __construct() {
         parent::__construct();
@@ -23,9 +23,9 @@ class Servicio_Model extends CI_Model {
     }
 
     // Actualizar un servicio
-    public function updateServicio($data) {
-        $this->db->where('id_servicio', $data['id_servicio']); // Cambia 'id_servicio' al nombre de tu campo ID
-        return $this->db->update('servicios', $data); // Cambia 'servicios' al nombre de tu tabla
+    public function updateServicio($data,$idServicio) {
+        $this->db->where('id_servicio', $idServicio); 
+        return $this->db->update('servicios', $data);
     }
 
     // Eliminar un servicio

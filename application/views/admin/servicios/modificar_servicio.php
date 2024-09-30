@@ -16,7 +16,7 @@
         <div class="card-body">
             <?php echo form_open_multipart('serviciocontroller/modificarServicioBD'); ?>
 
-            <input type="hidden" name="id_servicio" value="<?= $servicio->id_servicio; ?>">
+            <input type="hidden" name="idservicio" value="<?= $servicio->id_servicio; ?>">
 
             <div class="form-group">
                 <label for="nombre">Nombre del Servicio</label>
@@ -26,11 +26,6 @@
             <div class="form-group">
                 <label for="descripcion">Descripción</label>
                 <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required><?= $servicio->descripcion; ?></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="duracion">Duración (minutos)</label>
-                <input type="number" class="form-control" id="duracion" name="duracion" value="<?= $servicio->duracion; ?>" required>
             </div>
 
             <div class="form-group">
