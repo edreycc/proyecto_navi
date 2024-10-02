@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/card.css">
+
 <div class="container-fluid">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -8,8 +10,8 @@
     <div class="row">
         <?php if (!empty($servicios->result())): ?>
             <?php foreach ($servicios->result() as $servicio): ?>
-                <div class="col-md-3 mb-4"> <!-- Cambiado a col-md-3 para 4 tarjetas por fila -->
-                    <a href="#" class="card-link">
+                <div class="col-md-3 mb-4"> 
+                <a href="<?= site_url('DashboardControllerUser/reservar/' . $servicio->id_servicio); ?>" class="card-link">
                         <div class="card text-center border-0 shadow rounded-0 p-4" style="max-width: 22rem;">
                             <div class="icon">
                                 <i class="fa-solid fa-scissors"></i>

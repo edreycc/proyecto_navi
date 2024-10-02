@@ -13,3 +13,10 @@
     justify-content: center;
     align-items: center;
 } */
+
+.section {
+    border: 1px solid #dee2e6; /* Borde gris claro */
+    border-radius: 0.5rem; /* Esquinas redondeadas */
+    padding: 1rem; /* Espaciado interno */
+    margin-bottom: 1rem; /* Espaciado entre secciones */
+}

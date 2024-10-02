@@ -52,6 +52,14 @@
     <script src="<?php echo base_url(); ?>assets/js/mensajes.js"></script>
 
 
+    <!-- calendar -->
+    <script src="<?php echo base_url(); ?>calendar/js/jquery-3.3.1.min.js"></script>
+    <script src="<?php echo base_url(); ?>calendar/js/popper.min.js"></script>
+    <script src="<?php echo base_url(); ?>calendar/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>calendar/js/rome.js"></script>
+    <script src="<?php echo base_url(); ?>calendar/js/main.js"></script>
+
+    <script src="<?php echo base_url(); ?>assets/js/horarios.js"></script>
 
 
 </body>

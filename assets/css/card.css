@@ -31,3 +31,7 @@
   color: lightseagreen;
   font-weight: bold; /* Negritas */
 }
+
+.card:hover .precio {
+  color: #fff;
+}

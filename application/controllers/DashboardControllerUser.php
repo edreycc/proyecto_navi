@@ -20,6 +20,16 @@ class DashboardControllerUser extends CI_Controller
         $this->loadClientViews('cliente/inicio_cli',$data);
 
     }
+    public function reservar($id){
+        
+        $data['empleado']= $this->servicio_model->getServicioById($id);
+
+        $data['empleado']= $this->empleado_model->obtenerEmpleados();
+        
+        
+        $this->loadClientViews('cliente/reserva_cli/reserva_cliente',$data);
+        
+    }
     public function loadClientViews($viewName, $data = []) {
         
         $this->load->view('cliente/head');
@@ -29,24 +39,5 @@ class DashboardControllerUser extends CI_Controller
         $this->load->view('cliente/footer');
     }
     
-    // public function index()
-    // {
-    //     $this->load->view('inc/vistaslte/head');
-    //     $this->load->view('inc/vistaslte/menu');
-    //     $this->load->view('inc/vistaslte/footer');
-    //     $this->load->view('inc/vistaslte/test');
-    // }
-    // $this->load->view('inc/vistaslte/pie');
-
-    // public function vista(){
-    //     $this->load->view('dashboard_user');
-    // }
-
-    // public function index()
-	// {
-	// 	$this->load->view('inc/head');
-	// 	$this->load->view('loginform');
-        
-	// 	$this->load->view('inc/pie');
-	// }    
+     
 }

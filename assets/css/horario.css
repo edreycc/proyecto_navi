@@ -1,0 +1,16 @@
+.table-hover tbody tr:hover {
+    background-color: #f0f8ff; /* Color claro al pasar el mouse */
+}
+
+.select-hour {
+    width: 100%;
+}
+
+.selectable.selected {
+    background-color: #d4edda; /* Resaltar la fila seleccionada */
+    font-weight: bold;
+}
+
+#selected_hour {
+    font-size: 18px;
+}

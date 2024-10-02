@@ -9,17 +9,17 @@ class Servicio_model extends CI_Model {
 
     // Obtener todos los servicios
     public function getServicios() {
-        return $this->db->get('servicios'); // Cambia 'servicios' al nombre de tu tabla
+        return $this->db->get('servicios'); 
     }
 
     // Obtener un servicio por ID
     public function getServicioById($id) {
-        return $this->db->get_where('servicios', array('id_servicio' => $id))->row(); // Cambia 'servicios' al nombre de tu tabla
+        return $this->db->get_where('servicios', array('id_servicio' => $id))->row(); 
     }
 
     // Insertar un nuevo servicio
     public function insertServicio($data) {
-        return $this->db->insert('servicios', $data); // Cambia 'servicios' al nombre de tu tabla
+        return $this->db->insert('servicios', $data); 
     }
 
     // Actualizar un servicio
@@ -30,6 +30,6 @@ class Servicio_model extends CI_Model {
 
     // Eliminar un servicio
     public function deleteServicio($id) {
-        return $this->db->delete('servicios', array('id_servicio' => $id)); // Cambia 'id_servicio' al nombre de tu campo ID
+        return $this->db->delete('servicios', array('id_servicio' => $id)); 
     }
 }
