@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('usuario_model','account_model','producto_model','servicio_model','empleado_model');
+$autoload['model'] = array('usuario_model','account_model','producto_model','servicio_model','empleado_model','reserva_model');

@@ -7,9 +7,9 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url() ;?>index.php/dashboardcontrolleruser ">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url() ;?>index.php/dashboardcontrolleruser">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    
                 </div>
                 <div class="sidebar-brand-text mx-3">Admin-Navi Barber <sup></sup></div>
             </a>
@@ -32,18 +32,18 @@
                 Interface
             </div>
 
-            <!-- <?php echo base_url() ;?> -->
-            <!-- Nav Item - Utilities Collapse Menu -->
+            
             <li class="nav-item">
-                    <a class="nav-link collapsed" href=""  
+                <a class="nav-link collapsed" href="<?php echo base_url('index.php/dashboardcontrolleruser/solicitudReserva');?> "  
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fa-brands fa-product-hunt"></i>
-                    <span>Productos</span>
+                    <span>Horarios JOJO</span>
                 </a>
                
             </li>
 
             
+
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">

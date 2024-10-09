@@ -1,16 +1,35 @@
-.table-hover tbody tr:hover {
-    background-color: #f0f8ff; /* Color claro al pasar el mouse */
+/* Aumentar el tamaño de las letras en general */
+body {
+    font-size: 1.1rem; /* Aumentar el tamaño de la fuente */
 }
 
-.select-hour {
-    width: 100%;
+/* Aumentar la visibilidad de los encabezados */
+h6 {
+    font-size: 1.3rem; /* Aumenta el tamaño de los títulos */
+    font-weight: bold; /* Asegura que los encabezados sean negritas */
+    color: #004085; /* Cambiar el color a uno más oscuro para mejor contraste */
 }
 
-.selectable.selected {
-    background-color: #d4edda; /* Resaltar la fila seleccionada */
-    font-weight: bold;
+/* Aumentar el tamaño de la tabla de horarios */
+.table-hover td, .table-hover th {
+    font-size: 1.1rem; /* Aumentar el tamaño de las celdas de la tabla */
+    color: #343a40; /* Asegura un buen contraste */
 }
 
-#selected_hour {
-    font-size: 18px;
+/* Mejorar la visibilidad de los botones */
+.btn {
+    font-size: 1.1rem; /* Aumenta el tamaño del texto en los botones */
+    font-weight: bold; /* Negritas para mayor visibilidad */
+}
+
+#selected_hour, #displayDate {
+    font-size: 1.2rem; /* Aumentar el tamaño del texto seleccionado */
+    color: #28a745; /* Verde más vibrante */
+}
+
+/* Mejorar la visibilidad de los detalles de la reserva */
+.precio, .cantidad {
+    font-size: 1.2rem; /* Aumentar el tamaño de la fuente */
+    font-weight: bold; /* Poner en negritas */
+    color: #333; /* Un color más oscuro para mejor contraste */
 }

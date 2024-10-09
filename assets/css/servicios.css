@@ -1,0 +1,30 @@
+
+.servicio-card {
+    transition: all 0.5s; /* Transición suave para cambios */
+}
+
+.servicio-item {
+    padding: 10px;
+}
+
+.servicio-nombre {
+    font-size: 1.75rem; /* Aumenta el tamaño del texto */
+    font-weight: bold; /* Negritas */
+    color: #666; /* Color más suave (gris oscuro) *//* Color más oscuro para resaltar */
+}
+
+.servicio-descripcion {
+    color: gray;
+}
+
+.servicio-precio {
+    font-size: 1.5rem; /* Tamaño del texto */
+    color: #5bc0de; /* azul claro */
+
+    font-weight: bold; /* Negritas */
+}
+
+.servicio-checkbox{
+ height: 40px;
+ width: 40px;
+}
