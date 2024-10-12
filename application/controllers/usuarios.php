@@ -41,8 +41,10 @@ class Usuarios extends CI_Controller
 			$this->session->set_userdata('idusuario', $usuario->id_usuario);
 			$this->session->set_userdata('login', $usuario->login);
 			$this->session->set_userdata('tipo', $usuario->rol);
+			$this->session->set_userdata('correo', $usuario->correo);
 			// En el controlador, después de autenticar al usuario:
 			$this->session->set_userdata('nombre', $usuario->nombre);
+			
 	
 			
 	

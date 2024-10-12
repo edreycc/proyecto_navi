@@ -11,7 +11,7 @@
                 </div>
             </div>
             
-            <?= form_open_multipart('tu_controlador/procesar_reserva', ['id' => 'serviciosForm']); ?>
+            <?= form_open_multipart('reservacontroller/procesarReserva', ['id' => 'serviciosForm']); ?>
             <div class="servicio-list">
                 <div class="row">
                     <?php if (!empty($servicios->result())): ?>
@@ -25,7 +25,11 @@
                                             <p class="servicio-precio fw-bold">BS<?= $servicio->precio; ?></p>
                                         </div>
                                         <!-- Checkbox para seleccionar servicio -->
-                                        <input type="checkbox" class="servicio-checkbox" onclick="toggleServicio(this, '<?= $servicio->nombre; ?>', <?= $servicio->precio; ?>)" />
+                                        <input type="checkbox" class="servicio-checkbox" 
+                                        name="serviciosSeleccionados[]"  
+                                        value="<?= $servicio->id_servicio; ?>" 
+                                        onclick="toggleServicio(this, '<?= $servicio->nombre; ?>', <?= $servicio->precio; ?>, <?= $servicio->id_servicio; ?>)" />
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -57,19 +61,24 @@
                         <?php endif; ?>
                     </li>
 
-                        <li><strong>Servicios seleccionados:</strong> <ul id="serviciosSeleccionados"></ul></li>
-                        <input type="hidden" id="serviciosSelecionados" class="form-control" name="serviciosSelecionados" required>
+                    <li><strong>Servicios seleccionados:</strong> <ul id="serviciosSeleccionados"></ul></li>
+                    <input type="hidden" id="servicios" class="form-control" name="serviciosSeleccionados" required>
+                        
                         
                         <li><strong>Total Precio:</strong> <span id="totalPrecio">BS0.00</span></li>
-                        <input type="hidden" id="totalPrecio" class="form-control" name="totalPrecio" required>
-                        88  
+
+                        <input type="hidden" id="totalPrecioInput" class="form-control" name="totalPrecio" required>
+
                         <li><strong>Total Servicios:</strong> <span id="totalServicios">0</span></li>
-                        <input type="hidden" id="totalServicios" class="form-control" name="totalServicios" required>
+                        <input type="hidden" id="totalServiciosInput" class="form-control" name="totalServicios" required>
 
                     </ul>
                     <!-- Botón para confirmar reserva -->
                     <button class="btn btn-primary btn-block " onclick="enviarReserva()">Confirmar Reserva</button>
                 </div>
+                <!-- Campos ocultos corregidos -->
+
+
             </div>
         </div>
     </div>    
@@ -80,58 +89,60 @@
     let serviciosSeleccionados = [];
     let totalPrecio = 0;
 
-    // Función para agregar o quitar servicios seleccionados
-    function toggleServicio(checkbox, nombreServicio, precioServicio) {
-        if (checkbox.checked) {
-            // Agregar servicio seleccionado
-            serviciosSeleccionados.push({ nombre: nombreServicio, precio: precioServicio });
-            totalPrecio += precioServicio;
-        } else {
-            // Quitar servicio seleccionado
-            serviciosSeleccionados = serviciosSeleccionados.filter(servicio => servicio.nombre !== nombreServicio);
-            totalPrecio -= precioServicio;
-        }
-
-        actualizarInterfaz();
+    
+    function toggleServicio(checkbox, nombreServicio, precioServicio, idServicio) {
+    if (checkbox.checked) {
+        
+        serviciosSeleccionados.push({ id_servicio: idServicio, nombre: nombreServicio, precio: precioServicio });
+        totalPrecio += precioServicio;
+    } else {
+       
+        serviciosSeleccionados = serviciosSeleccionados.filter(servicio => servicio.nombre !== nombreServicio);
+        totalPrecio -= precioServicio;
     }
 
-    // Función para actualizar la interfaz
+    actualizarInterfaz();
+}
+
+
+    
     function actualizarInterfaz() {
         const listaServicios = document.getElementById("serviciosSeleccionados");
         const totalPrecioElement = document.getElementById("totalPrecio");
         const totalServiciosElement = document.getElementById("totalServicios");
 
-        // Limpiar la lista de servicios seleccionados
+       
         listaServicios.innerHTML = '';
 
-        // Añadir los servicios seleccionados a la lista
+        
         serviciosSeleccionados.forEach(servicio => {
             const li = document.createElement("li");
             li.textContent = `${servicio.nombre} - BS${servicio.precio}`;
             listaServicios.appendChild(li);
         });
 
-        // Actualizar el total de servicios y precio
+        
         totalPrecioElement.textContent = `BS${totalPrecio.toFixed(2)}`;
         totalServiciosElement.textContent = serviciosSeleccionados.length.toString();
     }
 
-    // Función para enviar los datos al controlador
     function enviarReserva() {
-        // Obtener la fecha de reserva seleccionada
-        const fechaReserva = document.getElementById('fechaReservaInput').value;
+        
+        const fechaReserva = document.getElementById('inputFechaReserva').value;
 
         // Convertir los servicios seleccionados a JSON
         const servicios = JSON.stringify(serviciosSeleccionados);
 
-        // Asignar los valores a los campos ocultos del formulario
-        document.getElementById('fechaReserva').value = fechaReserva;
+       
+        document.getElementById('inputFechaReserva').value = fechaReserva;
         document.getElementById('servicios').value = servicios;
-        document.getElementById('totalPrecioInput').value = totalPrecio;
+        document.getElementById('totalPrecioInput').value = totalPrecio.toFixed(2);
+        document.getElementById('totalServiciosInput').value = serviciosSeleccionados.length.toString();
 
-        // Enviar el formulario
+      
         document.getElementById('serviciosForm').submit();
     }
+
 </script>
 
 

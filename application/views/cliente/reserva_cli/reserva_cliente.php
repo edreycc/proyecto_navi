@@ -10,7 +10,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Reservar</h6>
         </div>
         <div class="card-body">
-            <?php echo form_open_multipart('dashboardcontrolleruser/elegirFecha'); ?>
+            <?php echo form_open_multipart('reservacontroller/elegirFecha'); ?>
             <div class="row">
                 <!-- Sección para seleccionar horarios -->
                 <div class="col-md-8">
