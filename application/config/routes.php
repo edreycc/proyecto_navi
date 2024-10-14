@@ -58,4 +58,5 @@ $route['usuarios/dashboard'] = 'usuarios/dashboard';
 $route['dash'] = 'DashboardController/index';
 $route['dashUser'] = 'DashboardControllerUser/vista';
 
+$route['ReservaController/confirmar/(:num)/(:any)'] = 'ReservaController/confirmar/$1/$2';
 
